@@ -16,28 +16,33 @@ umi.use(signerIdentity(signer));
     try {
         // Follow this JSON structure
         // https://docs.metaplex.com/programs/token-metadata/changelog/v1.0#json-structure
+        // https://devnet.irys.xyz/8wk3ND1UqQBb91X9swMyQg3exbBtYvY6Wa5R7N7hfy31
 
-        // const image = ???
-        // const metadata = {
-        //     name: "?",
-        //     symbol: "?",
-        //     description: "?",
-        //     image: "?",
-        //     attributes: [
-        //         {trait_type: '?', value: '?'}
-        //     ],
-        //     properties: {
-        //         files: [
-        //             {
-        //                 type: "image/png",
-        //                 uri: "?"
-        //             },
-        //         ]
-        //     },
-        //     creators: []
-        // };
-        // const myUri = ???
-        // console.log("Your metadata URI: ", myUri);
+        // try 1:
+        // const image = "https://explorer.solana.com/tx/AwSfUmfgCdMVkgao7rJ9aKzYyiKDHPmwLDsfx3NKvq2Trff1o2x75g96sNeyWtvz2LE3ST5EvRo3xinVz7XPfZd?cluster=devnet"
+        // try 2:
+        // const image = "https://explorer.solana.com/tx/aN4pSvyp4cXNgcpWVevaceFj413WQZUf9fjbyWUmAJxVVHwdAGthu4p4WVDRKLsWZUHe29cTUFWqFf3Jmh8SyFb?cluster=devnet"
+         const image = "https://explorer.solana.com/tx/4MRtXmUQzpgxFW8PBd6UkGpvf8r6Q1GMcFKoG8GBqaMYTtsKbAJRbrUBrAGdtcvpaTAEh8w6QWhiPQs945wbM22g?cluster=devnet"
+         const metadata = {
+             name: "J tapete",
+             symbol: "DRJ",
+             description: "DRj Description",
+             image,
+             attributes: [
+                 {trait_type: 'color', value: 'red'}
+             ],
+             properties: {
+                 files: [
+                     {
+                         type: "image/png",
+                         uri: image
+                     },
+                 ]
+             },
+             creators: []
+         };
+         const myUri = await  umi.uploader.uploadJson(metadata);
+         console.log("Your metadata URI: ", myUri);
     }
     catch(error) {
         console.log("Oops.. Something went wrong", error);
